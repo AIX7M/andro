@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>YouTube Video Downloader</title>
+</head>
+<body>
+<h1>YouTube Video Downloader</h1>
+<input type="text" id="video-id">
+<button onclick="downloadVideo()">Download Video</button>
+<script>
+function downloadVideo() {
+  var videoId = document.getElementById("video-id").value;
+  var url = "https://www.youtube.com/watch?v=" + videoId;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.responseType = "arraybuffer";
+  xhr.onload = function() {
+    var arrayBuffer = xhr.response;
+    var video = document.createElement("video");
+    video.src = window.URL.createObjectURL(arrayBuffer);
+    video.controls = true;
+    document.body.appendChild(video);
+  };
+  xhr.send();
+}
+</script>
+</body>
+</html>
